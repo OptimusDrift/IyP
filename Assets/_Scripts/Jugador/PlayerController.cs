@@ -76,26 +76,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Este método se encarga de simular la gravedad en el personaje y su caída "ligera" similar a la de Mario.
     private void AplicandoGravedad()
     {
-        //Para aplicar la gravedad setteamos al rg2D, una gravedad inicial de 3f para simular mejor la caiga "ligera" de Mario. Luego si se suelta la tecla antes de tiempo cae aun más rapído por el vj de Mario.
+        if (!estaSaltando) return; //Si no estamos en medio de un salto, no es necesario aplicar gravedad
 
-        if (!estaSaltando) return;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space)) // Si se mantiene presionada la tecla de salto, acumulamos tiempo de salto
         {
             tiempoSalto += Time.deltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.Space) && (tiempoSalto < maxTiempoSalto))
+        if (Input.GetKeyUp(KeyCode.Space) && (tiempoSalto < maxTiempoSalto)) //Si se suelta la tecla de salto antes de alcanzar el máximo tiempo de salto...
         {
-            //Aaumentamos la escala de la gravedad para que el personaje caiga más rapido al suelo.
+            // Aumentamos temporalmente la gravedad para que el personaje caiga más rápido
             rb2D.gravityScale = gravedadInicial * 3f;
         }
 
-        if (rb2D.velocity.y < 0)
+        if (rb2D.velocity.y < 0) // Si el personaje está cayendo después de un salto...
         {
-            rb2D.gravityScale = gravedadInicial;
-            if (estaTocandoTierra)
+            rb2D.gravityScale = gravedadInicial; // Restauramos la gravedad
+
+            if (estaTocandoTierra) // Si ha tocado el suelo. Reiniciamos todos sus valores por defecto
             {
                 estaSaltando = false;
                 tiempoSalto = 0f;
@@ -105,7 +106,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Saltar()
     {
-        if (estaSaltando) return;
+        if (estaSaltando) return; //Si estamos en medio de un salto, no necesitamos hacer nada.
 
         estaSaltando = true;
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);
@@ -138,6 +139,14 @@ public class PlayerController : MonoBehaviour
             ActivarFlor();
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hongo"))
+        {
+            Destroy(collision.gameObject);
+            ActivarHongo();
+        }
+    }
 
     private void ActivarFlor()
     {
@@ -158,6 +167,12 @@ public class PlayerController : MonoBehaviour
         {
             GameObject florProyectil = Instantiate(florProyectilPrefabricado, transform.position, Quaternion.identity);
         }
+    }
+    public void ActivarHongo()
+    {
+        //ToDo: Animacion de grande;
+        puntaje++;
+        Debug.Log("Activado Hongo");
     }
 
 }

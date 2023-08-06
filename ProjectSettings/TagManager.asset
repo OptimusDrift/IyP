@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Moneda
   - Flor
+  - Hongo
   layers:
   - Default
   - TransparentFX
