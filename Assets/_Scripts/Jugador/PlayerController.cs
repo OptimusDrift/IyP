@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool florActiva = false;
 
     public int puntaje = 0;
+    public int estado = 0; // Si es pequeño es 0. Si es grande es 1
 
     private float entradaHorizontal;
     private Rigidbody2D rb2D;
@@ -171,6 +172,7 @@ public class PlayerController : MonoBehaviour
     public void ActivarHongo()
     {
         //ToDo: Animacion de grande;
+        estado = 1;
         puntaje++;
         Debug.Log("Activado Hongo");
     }
