@@ -7,8 +7,10 @@ public class BloqueDestructible : MonoBehaviour
 {
     [SerializeField] public bool esDestructible = false;
     [SerializeField] public GameObject prefabRompible;
+    [SerializeField] public GameObject prefabPowerUp;
 
     private bool moviendose = false;
+    private bool estaVacio = false;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,8 +21,16 @@ public class BloqueDestructible : MonoBehaviour
             if (esDestructible && playerController.estado == 1) //Si el bloque es rompible y el personaje es grande...
             {
                 Romper();
+            }else if (!estaVacio && prefabPowerUp != null)
+            {
+                if (!moviendose) // Es el operador de negación "!". Es lo mismo que poner (moviendose == false)
+                {
+                    MostrarPowerUp();
+                    StartCoroutine(Animacion());
+                    estaVacio = true;
+                }
             }
-            else if (!moviendose) // Es el operador de negación "!". Es lo mismo que poner (moviendose == false)
+            else if(!moviendose)
             {
                 StartCoroutine(Animacion());
             }
@@ -84,5 +94,10 @@ public class BloqueDestructible : MonoBehaviour
 
         // Destruimos el objeto actual después de un corto tiempo
         Destroy(this.gameObject, 0.1f);
+    }
+    
+    private void MostrarPowerUp()
+    {
+        GameObject powerUp = Instantiate(prefabPowerUp, transform.position + Vector3.up * 1f, Quaternion.identity);
     }
 }
