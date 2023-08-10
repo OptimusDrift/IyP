@@ -147,6 +147,19 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             ActivarHongo();
         }
+        
+        if (collision.gameObject.CompareTag("Enemigo")) //si colisiona con un enemigo
+        {
+            if (estado == 1) //si es grande, se vuelve chiquito
+            {
+               estado = 0;
+               //ToDo: animación de chiquito
+            }
+            else  //si es chiquito, se termina el juego
+            {
+               StartCoroutine(MuerteJugador)
+            }
+        }
     }
 
     private void ActivarFlor()
@@ -175,6 +188,13 @@ public class PlayerController : MonoBehaviour
         estado = 1;
         puntaje++;
         Debug.Log("Activado Hongo");
+    }
+
+    IEnumerator MuerteJugador()
+    {
+        yield return new WaitForSeconds(1f);
+        //ToDo: animacion de muerte
+        //cartel de derrota?
     }
 
 }
