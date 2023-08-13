@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8630052211980348878}
   m_Layer: 8
   m_Name: ProjectilFlor
-  m_TagString: Untagged
+  m_TagString: Hongo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,8 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6faacffcf7b6e714da32dec064ee0f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuerzaRebote: 10
-  maxVelocidadX: 5
+  fuerzaReboteY: 3
+  velocidadHorizontal: 4
+  direccion: 1
 --- !u!58 &4337470055929059537
 CircleCollider2D:
   m_ObjectHideFlags: 0

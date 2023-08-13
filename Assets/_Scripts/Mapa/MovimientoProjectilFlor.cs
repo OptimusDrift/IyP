@@ -6,13 +6,17 @@ public class MovimientoProjectilFlor : MonoBehaviour
 {
     public float fuerzaReboteY  = 3f;
     public float velocidadHorizontal = 2f; // Velocidad máxima en el eje X
+    public float direccion = 1f;
     private Rigidbody2D rb;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
+    private void Start()
+    {
+        velocidadHorizontal *= direccion;
+    }
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(velocidadHorizontal, rb.velocity.y);

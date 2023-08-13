@@ -180,6 +180,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject florProyectil = Instantiate(florProyectilPrefabricado, transform.position, Quaternion.identity);
+            MovimientoProjectilFlor proyectil = florProyectil.transform.GetChild(0).GetComponent<MovimientoProjectilFlor>();
+            if(proyectil != null)
+            {
+                proyectil.direccion = transform.localScale.x;
+            }
         }
     }
     public void ActivarHongo()
