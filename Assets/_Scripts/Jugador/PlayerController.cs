@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
             }
             else  //si es chiquito, se termina el juego
             {
-               StartCoroutine(MuerteJugador)
+                StartCoroutine(MuerteJugador());
             }
         }
     }
