@@ -9,9 +9,11 @@ public class Movimiento : MonoBehaviour
 
     private float temporizador = 0f;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = rb.GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
@@ -32,6 +34,15 @@ public class Movimiento : MonoBehaviour
         else
         {
             temporizador = 0;
+        }
+
+        if (rb.velocity.x > 0f)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
         }
 
         rb.velocity = new Vector2(velocidadHorizontal, rb.velocity.y);

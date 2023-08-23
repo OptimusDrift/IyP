@@ -30,10 +30,12 @@ public class PlayerController : MonoBehaviour
 
     private float entradaHorizontal;
     private Rigidbody2D rb2D;
+    private Animator animaciones;
 
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        animaciones = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         estaTocandoTierra = TocandoTierra();
+        animaciones.SetBool("EstaTocandoTierra", estaTocandoTierra);
         entradaHorizontal = Input.GetAxis("Horizontal");
 
         AplicandoGravedad();
@@ -66,7 +69,6 @@ public class PlayerController : MonoBehaviour
     {
         rb2D.velocity = new Vector2(entradaHorizontal * velocidad, rb2D.velocity.y);
         Rotar();
-        //ToDo: Aqui animacion de caminar
     }
     private void Rotar()
     {
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour
     private void AplicandoGravedad()
     {
         if (!estaSaltando) return; //Si no estamos en medio de un salto, no es necesario aplicar gravedad
-
+        
 
         if (Input.GetKey(KeyCode.Space)) // Si se mantiene presionada la tecla de salto, acumulamos tiempo de salto
         {
@@ -101,7 +103,7 @@ public class PlayerController : MonoBehaviour
             {
                 estaSaltando = false;
                 tiempoSalto = 0f;
-                //ToDo: Desactivar aqui animacion de salto.
+                animaciones.SetBool("Saltando", estaSaltando);
             }
         }
     }
@@ -112,7 +114,15 @@ public class PlayerController : MonoBehaviour
         estaSaltando = true;
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);
         rb2D.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
-        //ToDo: Aqui animacion de salto y sonido.
+        //ToDo: Aqui sonido.
+        animaciones.SetBool("Saltando", estaSaltando);
+    }
+    private void SoloSaltar(int fuerza)
+    {
+        rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);
+        rb2D.AddForce(Vector2.up * fuerza, ForceMode2D.Impulse);
+        //ToDo: Aqui sonido.
+        animaciones.SetBool("Saltando", estaSaltando);
     }
     private bool TocandoTierra()
     {
@@ -133,6 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject); //Destruye el objeto con el que colisiona.
             puntaje++; //Suma 1 al puntaje.
+            GameManager.Instancia.AñadirMoneda();
         }
         if (collision.gameObject.CompareTag("Flor"))
         {
@@ -157,7 +168,13 @@ public class PlayerController : MonoBehaviour
             }
             else  //si es chiquito, se termina el juego
             {
-                StartCoroutine(MuerteJugador());
+                GameManager.Instancia.PerderVida();
+                SoloSaltar(10);
+                Destroy(collision.gameObject);
+                if(GameManager.Instancia.vidas <= 0)
+                {
+                    MuerteJugador();
+                }
             }
         }
     }
@@ -192,12 +209,20 @@ public class PlayerController : MonoBehaviour
         //ToDo: Animacion de grande;
         estado = 1;
         puntaje++;
+        GameManager.Instancia.AñadirMoneda();
         Debug.Log("Activado Hongo");
     }
 
-    IEnumerator MuerteJugador()
+    void MuerteJugador()
     {
-        yield return new WaitForSeconds(1f);
+        SoloSaltar(16);
+        gameObject.layer = LayerMask.NameToLayer("JugadorGameOver");
+        if (GameManager.Instancia.vidas <= 0)
+        {
+            GameManager.Instancia.esGameOver = true;
+            GameManager.Instancia.GameOver();
+        }
+        
         //ToDo: animacion de muerte
         //cartel de derrota?
     }

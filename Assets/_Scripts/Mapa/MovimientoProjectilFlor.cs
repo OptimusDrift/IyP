@@ -30,5 +30,7 @@ public class MovimientoProjectilFlor : MonoBehaviour
         {
             rb.AddForce(Vector2.up * fuerzaReboteY, ForceMode2D.Impulse);
         }
+
+        Destroy(this.gameObject, 3f);
     }
 }

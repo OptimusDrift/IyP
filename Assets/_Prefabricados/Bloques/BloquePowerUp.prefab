@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3767818228037983243}
   - component: {fileID: 4681900028917496531}
   - component: {fileID: 4207325321295674645}
+  - component: {fileID: 8610335350061648887}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.687462, b: 0.6273585, a: 1}
+  m_Sprite: {fileID: 507526930, guid: e434603425b47394a9e4e5e6c0581910, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,6 +147,24 @@ MonoBehaviour:
   esDestructible: 1
   prefabRompible: {fileID: 6018978626280468064, guid: bba3df2c513fbe04cb5eff177ea41065, type: 3}
   prefabPowerUp: {fileID: 8917447782799248522, guid: 7c5ad60cecac48e4d88e8f0e105e42e5, type: 3}
+  spriteVacio: {fileID: -787515690, guid: e434603425b47394a9e4e5e6c0581910, type: 3}
+--- !u!114 &8610335350061648887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5789838025574099950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ea4d37c7c8e3747a4bb26fabaa049b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 711652823, guid: e434603425b47394a9e4e5e6c0581910, type: 3}
+  - {fileID: 507526930, guid: e434603425b47394a9e4e5e6c0581910, type: 3}
+  frameTime: 0.5
+  stop: 0
 --- !u!1 &8944053741940449965
 GameObject:
   m_ObjectHideFlags: 0

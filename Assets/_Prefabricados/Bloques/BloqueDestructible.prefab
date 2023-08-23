@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5754717, g: 0.56189924, b: 0.56189924, a: 1}
+  m_Sprite: {fileID: -787515690, guid: e434603425b47394a9e4e5e6c0581910, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -145,6 +145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   esDestructible: 1
   prefabRompible: {fileID: 6018978626280468064, guid: bba3df2c513fbe04cb5eff177ea41065, type: 3}
+  prefabPowerUp: {fileID: 0}
+  spriteVacio: {fileID: 0}
 --- !u!1 &3077467144358631936
 GameObject:
   m_ObjectHideFlags: 0

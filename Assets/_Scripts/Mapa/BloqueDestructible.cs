@@ -8,10 +8,16 @@ public class BloqueDestructible : MonoBehaviour
     [SerializeField] public bool esDestructible = false;
     [SerializeField] public GameObject prefabRompible;
     [SerializeField] public GameObject prefabPowerUp;
-
+    public Sprite spriteVacio;
     private bool moviendose = false;
     private bool estaVacio = false;
 
+    private SpriteRenderer spriteRenderer;
+    
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,6 +34,13 @@ public class BloqueDestructible : MonoBehaviour
                     MostrarPowerUp();
                     StartCoroutine(Animacion());
                     estaVacio = true;
+                    spriteRenderer.sprite = spriteVacio;
+                    ScriptAnimacion scriptAnimacion = GetComponent<ScriptAnimacion>();
+                    if (scriptAnimacion != null)
+                    {
+                        scriptAnimacion.stop = true;
+                        scriptAnimacion.enabled = false; //Si tiene el script de animacion en sus componentes lo desactivamos
+                    }
                 }
             }
             else if(!moviendose)
