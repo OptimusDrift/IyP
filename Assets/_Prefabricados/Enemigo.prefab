@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8061080095234413783}
   - component: {fileID: 1015579950842579802}
   - component: {fileID: 291779330838632681}
+  - component: {fileID: 7059857487950984272}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Enemigo
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1243478213, guid: 5cb8644740bc84347958dc8c0c8de1c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -175,6 +176,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e0467a49f256a40b25e822c84f33a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7059857487950984272
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6649838980114755122}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 430af2e6977b8204bb6d2665649b46a6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8849931425672224276
 GameObject:
   m_ObjectHideFlags: 0
